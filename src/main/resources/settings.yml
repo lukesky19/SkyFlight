@@ -1,0 +1,17 @@
+# DO NOT TOUCH! This is used to update the config file format if needed.
+config-version: 1.0.0.0
+# The file in SkyFlight/locale to use.
+locale: en_US
+# The worlds flight is disabled in
+disabled-worlds:
+    - example
+# The boss bar shown for infinite flight
+infinite-boss-bar:
+    boss-bar-text: "Flight Enabled"
+    color: BLUE
+    overlay: PROGRESS
+# The boss bar shown for timed flight
+timed-boss-bar:
+    boss-bar-text: "Flight Enabled | Time: <time>"
+    color: RED
+    overlay: PROGRESS

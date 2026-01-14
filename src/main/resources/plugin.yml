@@ -1,0 +1,7 @@
+name: SkyFlight
+version: '${version}'
+main: com.github.lukesky19.skyFlight.SkyFlight
+api-version: '1.21'
+authors: [ lukeskywlker19 ]
+
+depend: [ BentoBox, SkyLib ]
