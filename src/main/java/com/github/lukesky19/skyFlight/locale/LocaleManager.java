@@ -304,7 +304,7 @@ public class LocaleManager extends SimpleConfigManager<Locale> {
         }
 
         if(firstUnit) {
-            messageBuilder.append("0 ").append(timeMessage.seconds());
+            messageBuilder.append(timeMessage.seconds());
         }
 
         if(!timeMessage.suffix().isEmpty()) messageBuilder.append(timeMessage.suffix());
