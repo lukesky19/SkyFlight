@@ -2170,7 +2170,6 @@ public class FlightManagerTest {
         verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
         verify(bossBarManager).showInfiniteBossBar(player);
         verify(player).setAllowFlight(true);
-        verify(player).setFlying(true);
     }
 
     /**
@@ -2196,7 +2195,6 @@ public class FlightManagerTest {
         verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
         verify(bossBarManager).showInfiniteBossBar(player);
         verify(player).setAllowFlight(true);
-        verify(player).setFlying(true);
     }
 
     /**
@@ -2271,7 +2269,6 @@ public class FlightManagerTest {
         assertTrue(playerData.isTimedFlight());
         verify(bossBarManager).showTimeBossBar(player);
         verify(player).setAllowFlight(true);
-        verify(player).setFlying(true);
     }
 
     /**
@@ -2302,7 +2299,6 @@ public class FlightManagerTest {
         assertTrue(playerData.isTimedFlight());
         verify(bossBarManager).showTimeBossBar(player);
         verify(player).setAllowFlight(true);
-        verify(player).setFlying(true);
     }
 
     /**

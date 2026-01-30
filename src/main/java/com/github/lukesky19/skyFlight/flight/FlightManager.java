@@ -242,9 +242,8 @@ public class FlightManager {
         // Show the boss bar
         bossBarManager.showInfiniteBossBar(player);
 
-        // Set their flight to allowed and set them to be flying
+        // Set their flight to allowed
         player.setAllowFlight(true);
-        player.setFlying(true);
 
         return true;
     }
@@ -280,9 +279,8 @@ public class FlightManager {
         // Show the boss bar
         bossBarManager.showTimeBossBar(player);
 
-        // Set their flight to allowed and set them to be flying
+        // Set their flight to allowed
         player.setAllowFlight(true);
-        player.setFlying(true);
 
         return true;
     }
