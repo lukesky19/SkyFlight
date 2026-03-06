@@ -18,6 +18,7 @@
 package com.github.lukesky19.skyFlight.flight;
 
 import com.github.lukesky19.skyFlight.SkyFlight;
+import com.github.lukesky19.skyFlight.api.event.FlightEnableEvent;
 import com.github.lukesky19.skyFlight.bossbar.BossBarManager;
 import com.github.lukesky19.skyFlight.locale.Locale;
 import com.github.lukesky19.skyFlight.locale.LocaleManager;
@@ -234,6 +235,14 @@ public class FlightManager {
     public boolean enableInfiniteFlight(@NotNull Player player, boolean message) {
         Locale locale = localeManager.getConfiguration();
 
+        // Call FlightEnableEvent
+        FlightEnableEvent flightEnableEvent = new FlightEnableEvent(player);
+        //noinspection DataFlowIssue Required for Unit Testing purposes
+        flightEnableEvent = skyFlight.callEvent(flightEnableEvent);
+
+        // Check if cancelled
+        if(flightEnableEvent.isCancelled()) return false;
+
         // Send a success message
         if(message) {
             player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
@@ -267,6 +276,14 @@ public class FlightManager {
 
             return false;
         }
+
+        // Call FlightEnableEvent
+        FlightEnableEvent flightEnableEvent = new FlightEnableEvent(player);
+        //noinspection DataFlowIssue Required for Unit Testing purposes
+        flightEnableEvent = skyFlight.callEvent(flightEnableEvent);
+
+        // Check if cancelled
+        if(flightEnableEvent.isCancelled()) return false;
 
         // Send a success message
         if(message) {

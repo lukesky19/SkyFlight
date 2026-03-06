@@ -18,7 +18,7 @@
 package com.github.lukesky19.skyFlight.integration.hooks;
 
 import com.github.lukesky19.skyFlight.SkyFlight;
-import com.github.lukesky19.skyFlight.integration.interfaces.Hook;
+import com.github.lukesky19.skylib.api.integration.Hook;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;

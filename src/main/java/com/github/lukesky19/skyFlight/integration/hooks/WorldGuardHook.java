@@ -17,9 +17,9 @@
 */
 package com.github.lukesky19.skyFlight.integration.hooks;
 
-import com.github.lukesky19.skyFlight.integration.interfaces.Hook;
 import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
 import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
+import com.github.lukesky19.skylib.api.integration.Hook;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.LocalPlayer;

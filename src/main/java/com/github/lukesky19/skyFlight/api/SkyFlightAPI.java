@@ -15,7 +15,7 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-package com.github.lukesky19.skyFlight;
+package com.github.lukesky19.skyFlight.api;
 
 import com.github.lukesky19.skyFlight.flight.FlightManager;
 import com.github.lukesky19.skyFlight.time.TimeManager;

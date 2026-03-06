@@ -17,6 +17,7 @@
 */
 package com.github.lukesky19.skyFlight;
 
+import com.github.lukesky19.skyFlight.api.SkyFlightAPI;
 import com.github.lukesky19.skyFlight.command.SkyFlightCommand;
 import com.github.lukesky19.skyFlight.locale.LocaleManager;
 import com.github.lukesky19.skyFlight.settings.SettingsManager;
@@ -36,9 +37,11 @@ import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
 import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -206,5 +209,16 @@ public final class SkyFlight extends SkyPlugin {
         this.getComponentLogger().error(AdventureUtil.deserialize("SkyLib Version 1.4.0.0 or newer is required to run this plugin."));
         this.getServer().getPluginManager().disablePlugin(this);
         return false;
+    }
+
+    /**
+     * This method is used for unit testing purposes only.
+     * @param event The event to call.
+     * @param <E> The class that extends {@link Event} passed to the method.
+     * @return The {@link Event} passed.
+     */
+    public <E extends Event> @NonNull E callEvent(@NonNull E event) {
+        this.getServer().getPluginManager().callEvent(event);
+        return event;
     }
 }

@@ -17,7 +17,7 @@
 */
 package com.github.lukesky19.skyFlight.integration;
 
-import com.github.lukesky19.skyFlight.integration.interfaces.Hook;
+import com.github.lukesky19.skylib.api.integration.Hook;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

@@ -18,6 +18,7 @@
 package com.github.lukesky19.skyFlight.flight;
 
 import com.github.lukesky19.skyFlight.SkyFlight;
+import com.github.lukesky19.skyFlight.api.event.FlightEnableEvent;
 import com.github.lukesky19.skyFlight.bossbar.BossBarManager;
 import com.github.lukesky19.skyFlight.common.MockBukkitExtension;
 import com.github.lukesky19.skyFlight.integration.HookManager;
@@ -36,6 +37,7 @@ import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -2082,11 +2084,18 @@ public class FlightManagerTest {
     @Test
     public void testEnableFlightInfiniteFlight() {
         SkyFlight skyFlight = mock(SkyFlight.class);
+        
         ComponentLogger logger = mock(ComponentLogger.class);
         when(skyFlight.getComponentLogger()).thenReturn(logger);
+        
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+
         SettingsManager settingsManager = mock(SettingsManager.class);
         LocaleManager localeManager = mock(LocaleManager.class);
+
         when(localeManager.getConfiguration()).thenReturn(locale);
+
         PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
         BossBarManager bossBarManager = mock(BossBarManager.class);
         HookManager hookManager = mock(HookManager.class);
@@ -2104,11 +2113,18 @@ public class FlightManagerTest {
     @Test
     public void testEnableFlightTimedFlight() {
         SkyFlight skyFlight = mock(SkyFlight.class);
+        
         ComponentLogger logger = mock(ComponentLogger.class);
         when(skyFlight.getComponentLogger()).thenReturn(logger);
+
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+
         SettingsManager settingsManager = mock(SettingsManager.class);
         LocaleManager localeManager = mock(LocaleManager.class);
+
         when(localeManager.getConfiguration()).thenReturn(locale);
+
         PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
         BossBarManager bossBarManager = mock(BossBarManager.class);
         HookManager hookManager = mock(HookManager.class);
@@ -2154,17 +2170,26 @@ public class FlightManagerTest {
     @Test
     public void testEnableInfiniteFlight() {
         SkyFlight skyFlight = mock(SkyFlight.class);
+
         ComponentLogger logger = mock(ComponentLogger.class);
         when(skyFlight.getComponentLogger()).thenReturn(logger);
+        
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+        
         SettingsManager settingsManager = mock(SettingsManager.class);
         LocaleManager localeManager = mock(LocaleManager.class);
+
         when(localeManager.getConfiguration()).thenReturn(locale);
+
         PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
         BossBarManager bossBarManager = mock(BossBarManager.class);
         HookManager hookManager = mock(HookManager.class);
         FlightManager flightManager = new FlightManager(skyFlight, settingsManager, localeManager, playerDataManager, bossBarManager, hookManager);
 
         Player player = mock(Player.class);
+        
+        
 
         assertTrue(flightManager.enableInfiniteFlight(player, true));
         verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
@@ -2179,11 +2204,18 @@ public class FlightManagerTest {
     @Test
     public void testEnableInfiniteFlightNoMessage() {
         SkyFlight skyFlight = mock(SkyFlight.class);
+
         ComponentLogger logger = mock(ComponentLogger.class);
         when(skyFlight.getComponentLogger()).thenReturn(logger);
+
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+
         SettingsManager settingsManager = mock(SettingsManager.class);
         LocaleManager localeManager = mock(LocaleManager.class);
+
         when(localeManager.getConfiguration()).thenReturn(locale);
+
         PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
         BossBarManager bossBarManager = mock(BossBarManager.class);
         HookManager hookManager = mock(HookManager.class);
@@ -2195,6 +2227,38 @@ public class FlightManagerTest {
         verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
         verify(bossBarManager).showInfiniteBossBar(player);
         verify(player).setAllowFlight(true);
+    }
+
+    /**
+     * Test {@link FlightManager#enableInfiniteFlight(Player, boolean)}, but the {@link FlightEnableEvent} is cancelled.
+     */
+    @Test
+    public void testEnableInfiniteFlightCancelled() {
+        SkyFlight skyFlight = mock(SkyFlight.class);
+
+        ComponentLogger logger = mock(ComponentLogger.class);
+        when(skyFlight.getComponentLogger()).thenReturn(logger);
+
+        SettingsManager settingsManager = mock(SettingsManager.class);
+        LocaleManager localeManager = mock(LocaleManager.class);
+
+        when(localeManager.getConfiguration()).thenReturn(locale);
+
+        PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
+        BossBarManager bossBarManager = mock(BossBarManager.class);
+        HookManager hookManager = mock(HookManager.class);
+        FlightManager flightManager = new FlightManager(skyFlight, settingsManager, localeManager, playerDataManager, bossBarManager, hookManager);
+
+        Player player = mock(Player.class);
+
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(flightEnableEvent.isCancelled()).thenReturn(true);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+
+        assertFalse(flightManager.enableInfiniteFlight(player, true));
+        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(bossBarManager, never()).showInfiniteBossBar(player);
+        verify(player, never()).setAllowFlight(true);
     }
 
     /**
@@ -2248,11 +2312,18 @@ public class FlightManagerTest {
     @Test
     public void testEnableTimedFlight() {
         SkyFlight skyFlight = mock(SkyFlight.class);
+
         ComponentLogger logger = mock(ComponentLogger.class);
         when(skyFlight.getComponentLogger()).thenReturn(logger);
+
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+
         SettingsManager settingsManager = mock(SettingsManager.class);
         LocaleManager localeManager = mock(LocaleManager.class);
+
         when(localeManager.getConfiguration()).thenReturn(locale);
+
         PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
         BossBarManager bossBarManager = mock(BossBarManager.class);
         HookManager hookManager = mock(HookManager.class);
@@ -2278,11 +2349,18 @@ public class FlightManagerTest {
     @Test
     public void testEnableTimedFlightNoMessage() {
         SkyFlight skyFlight = mock(SkyFlight.class);
+
         ComponentLogger logger = mock(ComponentLogger.class);
         when(skyFlight.getComponentLogger()).thenReturn(logger);
+
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+
         SettingsManager settingsManager = mock(SettingsManager.class);
         LocaleManager localeManager = mock(LocaleManager.class);
+
         when(localeManager.getConfiguration()).thenReturn(locale);
+
         PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
         BossBarManager bossBarManager = mock(BossBarManager.class);
         HookManager hookManager = mock(HookManager.class);
@@ -2299,6 +2377,43 @@ public class FlightManagerTest {
         assertTrue(playerData.isTimedFlight());
         verify(bossBarManager).showTimeBossBar(player);
         verify(player).setAllowFlight(true);
+    }
+
+    /**
+     * Test {@link FlightManager#enableTimedFlight(Player, boolean)}, but the {@link FlightEnableEvent} is cancelled.
+     */
+    @Test
+    public void testEnableTimedFlightCancelled() {
+        SkyFlight skyFlight = mock(SkyFlight.class);
+
+        ComponentLogger logger = mock(ComponentLogger.class);
+        when(skyFlight.getComponentLogger()).thenReturn(logger);
+
+        SettingsManager settingsManager = mock(SettingsManager.class);
+        LocaleManager localeManager = mock(LocaleManager.class);
+
+        when(localeManager.getConfiguration()).thenReturn(locale);
+
+        PlayerDataManager playerDataManager = mock(PlayerDataManager.class);
+        BossBarManager bossBarManager = mock(BossBarManager.class);
+        HookManager hookManager = mock(HookManager.class);
+        FlightManager flightManager = new FlightManager(skyFlight, settingsManager, localeManager, playerDataManager, bossBarManager, hookManager);
+
+        Player player = mock(Player.class);
+        UUID playerId = UUID.randomUUID();
+        when(player.getUniqueId()).thenReturn(playerId);
+        PlayerData playerData = new PlayerData(playerId);
+        when(playerDataManager.getPlayerData(playerId)).thenReturn(playerData);
+
+        FlightEnableEvent flightEnableEvent = mock(FlightEnableEvent.class);
+        when(flightEnableEvent.isCancelled()).thenReturn(true);
+        when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
+        
+        assertFalse(flightManager.enableTimedFlight(player, true));
+        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        assertFalse(playerData.isTimedFlight());
+        verify(bossBarManager, never()).showTimeBossBar(player);
+        verify(player, never()).setAllowFlight(true);
     }
 
     /**

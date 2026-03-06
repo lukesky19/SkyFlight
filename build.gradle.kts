@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.lukesky19"
-version = "0.1.1.0"
+version = "0.2.0.0"
 
 repositories {
     mavenLocal()
@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    compileOnly("com.github.lukesky19:SkyLib:1.4.0.0")
+    compileOnly("com.github.lukesky19:SkyLib:1.5.0.0")
 
     // Hooks
     compileOnly("world.bentobox:bentobox:2.7.0-SNAPSHOT")
@@ -29,7 +29,7 @@ dependencies {
     testImplementation("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT") {
         exclude("com.google.code.gson", "gson")
     }
-    testImplementation("com.github.lukesky19:SkyLib:1.4.0.0")
+    testImplementation("com.github.lukesky19:SkyLib:1.5.0.0")
     testImplementation("world.bentobox:bentobox:2.7.0-SNAPSHOT")
     testImplementation("com.sk89q.worldguard:worldguard-bukkit:7.0.15") {
         exclude("com.google.code.gson", "gson")
