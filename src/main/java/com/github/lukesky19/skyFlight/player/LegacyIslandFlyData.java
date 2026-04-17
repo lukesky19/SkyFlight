@@ -17,9 +17,9 @@
 */
 package com.github.lukesky19.skyFlight.player;
 
+import org.jetbrains.annotations.Nullable;
 import com.github.lukesky19.skylib.libs.configurate.objectmapping.ConfigSerializable;
 import com.github.lukesky19.skylib.libs.configurate.objectmapping.meta.Setting;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 

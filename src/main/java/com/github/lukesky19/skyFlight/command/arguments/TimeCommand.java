@@ -20,7 +20,7 @@ package com.github.lukesky19.skyFlight.command.arguments;
 import com.github.lukesky19.skyFlight.locale.Locale;
 import com.github.lukesky19.skyFlight.locale.LocaleManager;
 import com.github.lukesky19.skyFlight.time.TimeManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
@@ -72,9 +72,9 @@ public class TimeCommand {
                             long time = ctx.getArgument("time", Long.class);
                             if(time <= 0) {
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.timeInvalid()));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.timeInvalid()));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.timeInvalid()));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.timeInvalid()));
                                 }
 
                                 return 0;
@@ -86,21 +86,21 @@ public class TimeCommand {
                                         Placeholder.parsed("time", localeManager.formatFlightTime(
                                                 locale.timeFormat(), timeManager.getFlightTime(player))));
 
-                                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightTimeUpdated(), placeholders));
+                                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightTimeUpdated(), placeholders));
 
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTimeUpdated(), placeholders));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTimeUpdated(), placeholders));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTimeUpdated(), placeholders));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTimeUpdated(), placeholders));
                                 }
 
                                 return 1;
                             } else {
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTimeUpdateFailed(),
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTimeUpdateFailed(),
                                             List.of(Placeholder.parsed("player", player.getName()))));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTimeUpdateFailed(),
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTimeUpdateFailed(),
                                             List.of(Placeholder.parsed("player", player.getName()))));
                                 }
 
@@ -118,9 +118,9 @@ public class TimeCommand {
                             long time = ctx.getArgument("time", Long.class);
                             if(time <= 0) {
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.timeInvalid()));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.timeInvalid()));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.timeInvalid()));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.timeInvalid()));
                                 }
 
                                 return 0;
@@ -132,21 +132,21 @@ public class TimeCommand {
                                         Placeholder.parsed("time", localeManager.formatFlightTime(
                                                 locale.timeFormat(), timeManager.getFlightTime(player))));
 
-                                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightTimeUpdated(), placeholders));
+                                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightTimeUpdated(), placeholders));
 
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTimeUpdated(), placeholders));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTimeUpdated(), placeholders));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTimeUpdated(), placeholders));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTimeUpdated(), placeholders));
                                 }
 
                                 return 1;
                             } else {
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTimeUpdateFailed(),
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTimeUpdateFailed(),
                                             List.of(Placeholder.parsed("player", player.getName()))));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTimeUpdateFailed(),
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTimeUpdateFailed(),
                                             List.of(Placeholder.parsed("player", player.getName()))));
                                 }
 
@@ -164,9 +164,9 @@ public class TimeCommand {
                             long time = ctx.getArgument("time", Long.class);
                             if(time <= 0) {
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.timeInvalid()));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.timeInvalid()));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.timeInvalid()));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.timeInvalid()));
                                 }
 
                                 return 0;
@@ -178,21 +178,21 @@ public class TimeCommand {
                                         Placeholder.parsed("time", localeManager.formatFlightTime(
                                                 locale.timeFormat(), timeManager.getFlightTime(player))));
 
-                                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightTimeUpdated(), placeholders));
+                                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightTimeUpdated(), placeholders));
 
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTimeUpdated(), placeholders));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTimeUpdated(), placeholders));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTimeUpdated(), placeholders));
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTimeUpdated(), placeholders));
                                 }
 
                                 return 1;
                             } else {
                                 if(sender instanceof Player) {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTimeUpdateFailed(),
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTimeUpdateFailed(),
                                             List.of(Placeholder.parsed("player", player.getName()))));
                                 } else {
-                                    sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTimeUpdateFailed(),
+                                    sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTimeUpdateFailed(),
                                             List.of(Placeholder.parsed("player", player.getName()))));
                                 }
 
@@ -213,9 +213,9 @@ public class TimeCommand {
                                         locale.timeFormat(), timeManager.getFlightTime(player))));
 
                         if(sender instanceof Player) {
-                            sender.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.playerFlightTime(), placeholders));
+                            sender.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.playerFlightTime(), placeholders));
                         } else {
-                            sender.sendMessage(AdventureUtil.deserialize(locale.playerFlightTime(), placeholders));
+                            sender.sendMessage(AdventureUtility.deserialize(locale.playerFlightTime(), placeholders));
                         }
 
                         return 1;
@@ -225,7 +225,7 @@ public class TimeCommand {
                 Locale locale = localeManager.getConfiguration();
                 CommandSender sender = ctx.getSource().getSender();
                 if(!(sender instanceof Player player)) {
-                    sender.sendMessage(AdventureUtil.deserialize(locale.commandPlayerOnly()));
+                    sender.sendMessage(AdventureUtility.deserialize(locale.commandPlayerOnly()));
                     return 0;
                 }
 
@@ -233,7 +233,7 @@ public class TimeCommand {
                         Placeholder.parsed("time", localeManager.formatFlightTime(
                                 locale.timeFormat(), timeManager.getFlightTime(player))));
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightTime(), placeholders));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightTime(), placeholders));
 
                 return 1;
             }).build();

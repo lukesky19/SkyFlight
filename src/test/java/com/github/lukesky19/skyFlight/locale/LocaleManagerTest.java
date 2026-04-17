@@ -73,7 +73,7 @@ public class LocaleManagerTest {
         localeFolder.mkdirs();
 
         // Intercept data folder requests
-        when(skyFlight.getDataFolder()).thenReturn(dataFolder);
+        when(skyFlight.getDirectoryFile()).thenReturn(dataFolder);
 
         // Intercepting the call and simulating the real method's behavior without real execution
         doAnswer(invocation -> {
@@ -198,7 +198,7 @@ public class LocaleManagerTest {
         localeFolder.mkdirs();
 
         // Intercept data folder requests
-        when(skyFlight.getDataFolder()).thenReturn(dataFolder);
+        when(skyFlight.getDirectoryFile()).thenReturn(dataFolder);
 
         // Intercepting the call and simulating the real method's behavior without real execution
         doAnswer(invocation -> {
@@ -1496,10 +1496,10 @@ public class LocaleManagerTest {
         displayName = displayName.replaceAll("[^a-zA-Z0-9]", "_");
 
         // Intercept data folder requests
-        when(skyFlight.getDataFolder()).thenReturn(new File("test_data_" + this.getClass().getName() + "_" + displayName));
+        when(skyFlight.getDirectoryFile()).thenReturn(new File("test_data_" + this.getClass().getName() + "_" + displayName));
 
         LocaleManager localeManager = new LocaleManager(skyFlight, settingsManager);
-        localeManager.saveBundledConfig();
+        localeManager.saveDefaultConfiguration();
     }
 
     /**

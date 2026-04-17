@@ -23,7 +23,7 @@ import com.github.lukesky19.skyFlight.player.PlayerDataManager;
 import com.github.lukesky19.skyFlight.settings.Settings;
 import com.github.lukesky19.skyFlight.settings.SettingsManager;
 import com.github.lukesky19.skyFlight.player.PlayerData;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -71,7 +71,7 @@ public class BossBarManager {
     public void showTimeBossBar(@NotNull Player player) {
         @Nullable Settings settings = settingsManager.getConfiguration();
         if(settings == null || settings.timedBossBar().bossBarText() == null || settings.timedBossBar().color() == null || settings.timedBossBar().overlay() == null) {
-            logger.warn(AdventureUtil.deserialize("Unable to show the timed boss bar to player " + player.getName() + " due to invalid plugin settings."));
+            logger.warn(AdventureUtility.plain("Unable to show the timed boss bar to player " + player.getName() + " due to invalid plugin settings."));
             return;
         }
 
@@ -83,7 +83,7 @@ public class BossBarManager {
         if(playerData == null) return;
 
         BossBar bossBar = BossBar.bossBar(
-                AdventureUtil.deserialize(settings.timedBossBar().bossBarText(), List.of(Placeholder.parsed("time", localeManager.formatFlightTime(localeManager.getConfiguration().timeFormat(), playerData.getFlightTime())))),
+                AdventureUtility.deserialize(settings.timedBossBar().bossBarText(), List.of(Placeholder.parsed("time", localeManager.formatFlightTime(localeManager.getConfiguration().timeFormat(), playerData.getFlightTime())))),
                 1,
                 settings.timedBossBar().color(),
                 settings.timedBossBar().overlay());
@@ -100,7 +100,7 @@ public class BossBarManager {
     public void showInfiniteBossBar(@NotNull Player player) {
         @Nullable Settings settings = settingsManager.getConfiguration();
         if(settings == null || settings.infiniteBossBar().bossBarText() == null || settings.infiniteBossBar().color() == null || settings.infiniteBossBar().overlay() == null) {
-            logger.warn(AdventureUtil.deserialize("Unable to show the infinite boss bar to player " + player.getName() + " due to invalid plugin settings."));
+            logger.warn(AdventureUtility.plain("Unable to show the infinite boss bar to player " + player.getName() + " due to invalid plugin settings."));
             return;
         }
 
@@ -108,7 +108,7 @@ public class BossBarManager {
         removeBossBar(player);
 
         BossBar bossBar = BossBar.bossBar(
-                AdventureUtil.deserialize(settings.infiniteBossBar().bossBarText()),
+                AdventureUtility.deserialize(settings.infiniteBossBar().bossBarText()),
                 1,
                 settings.infiniteBossBar().color(),
                 settings.infiniteBossBar().overlay());
@@ -126,14 +126,14 @@ public class BossBarManager {
     public boolean updateBossBar(@NotNull Player player) {
         @Nullable Settings settings = settingsManager.getConfiguration();
         if(settings == null || settings.timedBossBar().bossBarText() == null || settings.timedBossBar().color() == null || settings.timedBossBar().overlay() == null) {
-            logger.warn(AdventureUtil.deserialize("Unable to update the timed boss bar for player " + player.getName() + " due to invalid plugin settings."));
+            logger.warn(AdventureUtility.plain("Unable to update the timed boss bar for player " + player.getName() + " due to invalid plugin settings."));
             return false;
         }
 
         UUID playerId = player.getUniqueId();
         @Nullable PlayerData playerData = playerDataManager.getPlayerData(playerId);
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("Unable to update the timed boss bar for player " + player.getName() + " due to invalid player data."));
+            logger.warn(AdventureUtility.plain("Unable to update the timed boss bar for player " + player.getName() + " due to invalid player data."));
             return false;
         }
         if(!playerData.isTimedFlight()) {
@@ -142,11 +142,11 @@ public class BossBarManager {
 
         @Nullable BossBar bossBar = activeBossBars.get(playerId);
         if(bossBar == null) {
-            logger.warn(AdventureUtil.deserialize("Unable to update the timed boss bar for player " + player.getName() + " due to no boss bar associated with the player."));
+            logger.warn(AdventureUtility.plain("Unable to update the timed boss bar for player " + player.getName() + " due to no boss bar associated with the player."));
             return false;
         }
 
-        bossBar.name(AdventureUtil.deserialize(settings.timedBossBar().bossBarText(),
+        bossBar.name(AdventureUtility.deserialize(settings.timedBossBar().bossBarText(),
                 List.of(Placeholder.parsed("time", localeManager.formatFlightTime(
                         localeManager.getConfiguration().timeFormat(), playerData.getFlightTime())))));
 

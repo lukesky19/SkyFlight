@@ -24,7 +24,8 @@ import com.github.lukesky19.skyFlight.flight.FlightManager;
 import com.github.lukesky19.skyFlight.player.PlayerDataManager;
 import com.github.lukesky19.skyFlight.locale.LocaleManager;
 import com.github.lukesky19.skyFlight.settings.SettingsManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
+import com.github.lukesky19.skylib.paper.api.adventure.PaperAdventureUtility;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -87,7 +88,7 @@ public class InfoCommand {
                     Locale locale = localeManager.getConfiguration();
                     CommandSender sender = ctx.getSource().getSender();
                     if(!(sender instanceof Player player)) {
-                        sender.sendMessage(AdventureUtil.deserialize(locale.commandPlayerOnly()));
+                        sender.sendMessage(AdventureUtility.deserialize(locale.commandPlayerOnly()));
                         return 0;
                     }
 
@@ -109,56 +110,56 @@ public class InfoCommand {
 
         List<TagResolver.Single> placeholders = new ArrayList<>();
         placeholders.add(playerData != null ?
-                Placeholder.component("has_player_data", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("has_player_data", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("has_player_data", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("has_player_data", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.canFly(player, false) ?
-                Placeholder.component("can_fly", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("can_fly", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("can_fly", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("can_fly", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.isWorldAllowed(settings, player, false) ?
-                Placeholder.component("world_allowed", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("world_allowed", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("world_allowed", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("world_allowed", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.isBentoBoxAllowed(player, false) ?
-                Placeholder.component("bentobox_allowed", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("bentobox_allowed", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("bentobox_allowed", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("bentobox_allowed", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.isWorldGuardAllowed(player, false) ?
-                Placeholder.component("worldguard_allowed", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("worldguard_allowed", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("worldguard_allowed", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("worldguard_allowed", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.hasBypassPermission(player) ?
-                Placeholder.component("has_bypass_permission", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("has_bypass_permission", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("has_bypass_permission", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("has_bypass_permission", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.hasInfiniteFlightPermission(player, false) ?
-                Placeholder.component("has_infinite_flight_permission", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("has_infinite_flight_permission", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("has_infinite_flight_permission", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("has_infinite_flight_permission", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(flightManager.hasTimedFlightPermission(player, false) ?
-                Placeholder.component("has_timed_flight_permission", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("has_timed_flight_permission", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("has_timed_flight_permission", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("has_timed_flight_permission", AdventureUtility.deserialize("<red>false</red>")));
 
-        placeholders.add(Placeholder.component("flight_time", AdventureUtil.deserialize(
+        placeholders.add(Placeholder.component("flight_time", AdventureUtility.deserialize(
                 localeManager.formatFlightTime(
                         localeManager.getConfiguration().timeFormat(),
                         playerData != null ? playerData.getFlightTime() : 0))));
 
         placeholders.add(player.getAllowFlight() ?
-                Placeholder.component("player_allowed_flight", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("player_allowed_flight", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("player_allowed_flight", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("player_allowed_flight", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(player.isFlying() ?
-                Placeholder.component("player_is_flying", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("player_is_flying", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("player_is_flying", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("player_is_flying", AdventureUtility.deserialize("<red>false</red>")));
 
         placeholders.add(playerData != null && playerData.isTimedFlight() ?
-                Placeholder.component("timed_flight", AdventureUtil.deserialize("<green>true</green>")) :
-                Placeholder.component("timed_flight", AdventureUtil.deserialize("<red>false</red>")));
+                Placeholder.component("timed_flight", AdventureUtility.deserialize("<green>true</green>")) :
+                Placeholder.component("timed_flight", AdventureUtility.deserialize("<red>false</red>")));
 
         for(String infoMessage : locale.info()) {
-            sender.sendMessage(AdventureUtil.deserialize(player, infoMessage, placeholders));
+            sender.sendMessage(PaperAdventureUtility.deserialize(player, infoMessage, placeholders));
         }
     }
 }

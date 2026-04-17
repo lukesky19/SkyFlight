@@ -21,7 +21,7 @@ import com.github.lukesky19.skyFlight.SkyFlight;
 import com.github.lukesky19.skyFlight.bossbar.BossBarManager;
 import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.player.PlayerDataManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +60,7 @@ public class TimeManager {
         // Check if the player has player data
         @Nullable PlayerData playerData = playerDataManager.getPlayerData(player.getUniqueId());
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("Player " + player.getName() + " has no player data loaded."));
+            logger.warn(AdventureUtility.plain("Player " + player.getName() + " has no player data loaded."));
             return false;
         }
 
@@ -81,7 +81,7 @@ public class TimeManager {
         // Check if the player has player data
         @Nullable PlayerData playerData = playerDataManager.getPlayerData(player.getUniqueId());
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("Player " + player.getName() + " has no player data loaded."));
+            logger.warn(AdventureUtility.plain("Player " + player.getName() + " has no player data loaded."));
             return false;
         }
 
@@ -102,7 +102,7 @@ public class TimeManager {
         // Check if the player has player data
         @Nullable PlayerData playerData = playerDataManager.getPlayerData(player.getUniqueId());
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("Player " + player.getName() + " has no player data loaded."));
+            logger.warn(AdventureUtility.plain("Player " + player.getName() + " has no player data loaded."));
             return false;
         }
 
@@ -122,7 +122,7 @@ public class TimeManager {
         // Check if the player has player data
         @Nullable PlayerData playerData = playerDataManager.getPlayerData(player.getUniqueId());
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("Player " + player.getName() + " has no player data loaded."));
+            logger.warn(AdventureUtility.plain("Player " + player.getName() + " has no player data loaded."));
             return 0;
         }
 

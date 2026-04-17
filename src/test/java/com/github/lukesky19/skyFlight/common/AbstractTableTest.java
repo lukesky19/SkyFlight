@@ -58,7 +58,7 @@ public abstract class AbstractTableTest {
         displayName = displayName.replaceAll("[^a-zA-Z0-9]", "_");
 
         // Intercept data folder requests
-        when(skyFlight.getDataFolder()).thenReturn(new File("test_data_" + this.getClass().getName() + "_" + displayName));
+        when(skyFlight.getDirectoryFile()).thenReturn(new File("test_data_" + this.getClass().getName() + "_" + displayName));
 
         // Set up the mocked queue manager
         mockedQueueManager = Mockito.mock(QueueManager.class);

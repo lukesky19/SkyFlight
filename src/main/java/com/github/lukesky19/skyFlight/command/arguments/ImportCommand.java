@@ -21,16 +21,17 @@ import com.github.lukesky19.skyFlight.player.LegacyIslandFlyData;
 import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.flight.FlightManager;
 import com.github.lukesky19.skyFlight.player.PlayerDataManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
-import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
-import com.github.lukesky19.skylib.api.configurate.ConfigurationUtility;
-import com.github.lukesky19.skylib.libs.configurate.ConfigurateException;
-import com.github.lukesky19.skylib.libs.configurate.gson.GsonConfigurationLoader;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
+import com.github.lukesky19.skylib.common.platform.PlatformUtils;
+import com.github.lukesky19.skylib.paper.api.plugin.SkyPlugin;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
+import com.github.lukesky19.skylib.libs.configurate.ConfigurateException;
+import com.github.lukesky19.skylib.libs.configurate.gson.GsonConfigurationLoader;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -72,7 +73,7 @@ public class ImportCommand {
                     File legacyFile = legacyPath.toFile();
 
                     if(!legacyFile.exists() || !legacyFile.isDirectory()) {
-                        sender.sendMessage(AdventureUtil.deserialize("<red>Unable to import data from the BentoBox IslandFly addon due to no data to import."));
+                        sender.sendMessage(AdventureUtility.deserialize("<red>Unable to import data from the BentoBox IslandFly addon due to no data to import."));
                         return 0;
                     }
 
@@ -87,16 +88,16 @@ public class ImportCommand {
                         if(playerFile.isDirectory()) continue;
 
                         try {
-                            GsonConfigurationLoader loader = ConfigurationUtility.getGsonConfigurationLoader(playerFile.toPath());
+                            GsonConfigurationLoader loader = createLoader(playerFile.toPath());
                             LegacyIslandFlyData legacyIslandFlyData = loader.load().get(LegacyIslandFlyData.class);
 
                             if(legacyIslandFlyData == null) {
-                                sender.sendMessage(AdventureUtil.deserialize("<red>Failed to load data from " + playerFile.getName()));
+                                sender.sendMessage(AdventureUtility.deserialize("<red>Failed to load data from " + playerFile.getName()));
                                 continue;
                             }
 
                             if(legacyIslandFlyData.uuid() == null) {
-                                sender.sendMessage(AdventureUtil.deserialize("<red>The UUID from the legacy data is null. File Name: " + playerFile.getName()));
+                                sender.sendMessage(AdventureUtility.deserialize("<red>The UUID from the legacy data is null. File Name: " + playerFile.getName()));
                                 continue;
                             }
 
@@ -107,7 +108,7 @@ public class ImportCommand {
 
                             playerDataManager.setPlayerData(legacyIslandFlyData.uuid(), playerData, true);
                         } catch (ConfigurateException e) {
-                            sender.sendMessage(AdventureUtil.deserialize("<red>An error occurred while loading data from " + playerFile.getName() + ". Error: " + e.getMessage()));
+                            sender.sendMessage(AdventureUtility.deserialize("<red>An error occurred while loading data from " + playerFile.getName() + ". Error: " + e.getMessage()));
                         }
                     }
 
@@ -119,7 +120,7 @@ public class ImportCommand {
 
                     // Load player data and enable flight if necessary
                     skyPlugin.getServer().getOnlinePlayers().forEach(player -> {
-                        playerDataManager.loadPlayerData(player.getUniqueId()).thenAccept(v -> {
+                        playerDataManager.loadPlayerData(player.getUniqueId()).thenAccept(_ -> {
                             if(flightManager.canFly(player, true)) {
                                 flightManager.enableFlight(player, true);
                             }
@@ -127,9 +128,24 @@ public class ImportCommand {
                     });
 
                     // Send a success message
-                    sender.sendMessage(AdventureUtil.deserialize("<green>Data importation is done.</green>"));
+                    sender.sendMessage(AdventureUtility.deserialize("<green>Data importation is done.</green>"));
 
                     return 1;
                 }).build();
+    }
+
+    /**
+     * Create the {@link GsonConfigurationLoader} for the path provided.
+     * @param path The {@link Path}.
+     * @return The {@link GsonConfigurationLoader}.
+     */
+    protected @NonNull GsonConfigurationLoader createLoader(@NonNull Path path) {
+        return GsonConfigurationLoader.builder()
+                .path(path)
+                .indent(4)
+                .defaultOptions(configurationOptions ->
+                        configurationOptions.serializers(builder ->
+                                builder.registerAll(PlatformUtils.getSerializers())))
+                .build();
     }
 }

@@ -59,7 +59,7 @@ public class SettingsManagerTest {
         displayName = displayName.replace("TestInfo", "");
 
         // Intercept data folder requests
-        when(skyFlight.getDataFolder()).thenReturn(new File("test_data_" + this.getClass().getName() + "_" + displayName));
+        when(skyFlight.getDirectoryFile()).thenReturn(new File("test_data_" + this.getClass().getName() + "_" + displayName));
         when(skyFlight.getComponentLogger()).thenReturn(logger);
     }
 

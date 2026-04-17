@@ -30,7 +30,7 @@ import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.player.PlayerDataManager;
 import com.github.lukesky19.skyFlight.settings.Settings;
 import com.github.lukesky19.skyFlight.settings.SettingsManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
@@ -199,7 +199,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPluginSettings()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPluginSettings()));
     }
 
     /**
@@ -270,7 +270,7 @@ public class FlightManagerTest {
         when(player.hasPermission("skyflight.fly.timed")).thenReturn(false);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoPermission()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoPermission()));
     }
 
     /**
@@ -352,7 +352,7 @@ public class FlightManagerTest {
         when(world.getName()).thenReturn("world");
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
     }
 
     /**
@@ -495,7 +495,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.getIslandAtLocation(location)).thenReturn(null);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
     }
 
     /**
@@ -534,7 +534,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.isOutsideIsland(player, island)).thenReturn(true);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
     }
 
     /**
@@ -574,7 +574,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.isFlightDisallowed(player, island)).thenReturn(true);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
     }
 
     /**
@@ -663,7 +663,7 @@ public class FlightManagerTest {
         when(worldGuardHook.isFlightDisallowed(player, location)).thenReturn(true);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
     }
 
     /**
@@ -757,7 +757,7 @@ public class FlightManagerTest {
         when(playerDataManager.getPlayerData(playerId)).thenReturn(null);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPlayerData()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPlayerData()));
     }
 
     /**
@@ -807,7 +807,7 @@ public class FlightManagerTest {
         when(playerDataManager.getPlayerData(playerId)).thenReturn(playerData);
 
         assertFalse(flightManager.canFly(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoFlightTime()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoFlightTime()));
     }
 
     /**
@@ -881,7 +881,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPluginSettings()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPluginSettings()));
     }
 
     /**
@@ -951,7 +951,7 @@ public class FlightManagerTest {
         when(player.hasPermission("skyflight.fly.infinite")).thenReturn(false);
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoPermission()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoPermission()));
     }
 
     /**
@@ -1030,7 +1030,7 @@ public class FlightManagerTest {
         when(world.getName()).thenReturn("world");
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
     }
 
     /**
@@ -1169,7 +1169,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.getIslandAtLocation(location)).thenReturn(null);
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
     }
 
     /**
@@ -1207,7 +1207,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.isOutsideIsland(player, island)).thenReturn(true);
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
     }
 
     /**
@@ -1246,7 +1246,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.isFlightDisallowed(player, island)).thenReturn(true);
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
     }
 
     /**
@@ -1333,7 +1333,7 @@ public class FlightManagerTest {
         when(worldGuardHook.isFlightDisallowed(player, location)).thenReturn(true);
 
         assertFalse(flightManager.canFlyInfinite(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
     }
 
     /**
@@ -1400,7 +1400,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPluginSettings()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPluginSettings()));
     }
 
     /**
@@ -1447,7 +1447,7 @@ public class FlightManagerTest {
         when(player.getUniqueId()).thenReturn(playerId);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPlayerData()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPlayerData()));
     }
 
     /**
@@ -1503,7 +1503,7 @@ public class FlightManagerTest {
         when(playerDataManager.getPlayerData(playerId)).thenReturn(playerData);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoFlightTime()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoFlightTime()));
     }
 
     /**
@@ -1532,7 +1532,7 @@ public class FlightManagerTest {
         when(player.hasPermission("skyflight.fly.timed")).thenReturn(false);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoPermission()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoPermission()));
     }
 
     /**
@@ -1590,7 +1590,7 @@ public class FlightManagerTest {
         when(player.hasPermission("skyflight.fly.timed")).thenReturn(true);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoFlightTime()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoFlightTime()));
     }
 
     /**
@@ -1683,7 +1683,7 @@ public class FlightManagerTest {
         when(world.getName()).thenReturn("world");
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
     }
 
     /**
@@ -1842,7 +1842,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.getIslandAtLocation(location)).thenReturn(null);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
     }
 
     /**
@@ -1885,7 +1885,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.isOutsideIsland(player, island)).thenReturn(true);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
     }
 
     /**
@@ -1929,7 +1929,7 @@ public class FlightManagerTest {
         when(bentoBoxHook.isFlightDisallowed(player, island)).thenReturn(true);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
     }
 
     /**
@@ -2026,7 +2026,7 @@ public class FlightManagerTest {
         when(worldGuardHook.isFlightDisallowed(player, location)).thenReturn(true);
 
         assertFalse(flightManager.canFlyTimed(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
     }
 
     /**
@@ -2192,7 +2192,7 @@ public class FlightManagerTest {
         
 
         assertTrue(flightManager.enableInfiniteFlight(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         verify(bossBarManager).showInfiniteBossBar(player);
         verify(player).setAllowFlight(true);
     }
@@ -2224,7 +2224,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertTrue(flightManager.enableInfiniteFlight(player, false));
-        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(player, never()).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         verify(bossBarManager).showInfiniteBossBar(player);
         verify(player).setAllowFlight(true);
     }
@@ -2256,7 +2256,7 @@ public class FlightManagerTest {
         when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
 
         assertFalse(flightManager.enableInfiniteFlight(player, true));
-        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(player, never()).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         verify(bossBarManager, never()).showInfiniteBossBar(player);
         verify(player, never()).setAllowFlight(true);
     }
@@ -2280,7 +2280,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertFalse(flightManager.enableTimedFlight(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPlayerData()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPlayerData()));
     }
 
     /**
@@ -2303,7 +2303,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertFalse(flightManager.enableTimedFlight(player, false));
-        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPlayerData()));
+        verify(player, never()).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPlayerData()));
     }
 
     /**
@@ -2336,7 +2336,7 @@ public class FlightManagerTest {
         when(playerDataManager.getPlayerData(playerId)).thenReturn(playerData);
 
         assertTrue(flightManager.enableTimedFlight(player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         assertTrue(playerData.isTimedFlight());
         verify(bossBarManager).showTimeBossBar(player);
         verify(player).setAllowFlight(true);
@@ -2373,7 +2373,7 @@ public class FlightManagerTest {
         when(playerDataManager.getPlayerData(playerId)).thenReturn(playerData);
 
         assertTrue(flightManager.enableTimedFlight(player, false));
-        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(player, never()).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         assertTrue(playerData.isTimedFlight());
         verify(bossBarManager).showTimeBossBar(player);
         verify(player).setAllowFlight(true);
@@ -2410,7 +2410,7 @@ public class FlightManagerTest {
         when(skyFlight.callEvent(any(Event.class))).thenReturn(flightEnableEvent);
         
         assertFalse(flightManager.enableTimedFlight(player, true));
-        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+        verify(player, never()).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         assertFalse(playerData.isTimedFlight());
         verify(bossBarManager, never()).showTimeBossBar(player);
         verify(player, never()).setAllowFlight(true);
@@ -2464,11 +2464,11 @@ public class FlightManagerTest {
         when(worldGuardHook.isFlightDisallowed(player, location)).thenReturn(false);
 
         CompletableFuture<Boolean> future = flightManager.disableFlightWithDelay(player, 5);
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabledDelay()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabledDelay()));
 
         scheduler.performTicks(20L * 6);
 
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNotDisabled()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNotDisabled()));
         assertFalse(future.get());
     }
 
@@ -2561,7 +2561,7 @@ public class FlightManagerTest {
         when(player.hasPermission("skyflight.fly.infinite")).thenReturn(false);
 
         CompletableFuture<Boolean> future = flightManager.disableFlightWithDelay(player, 5);
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabledDelay()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabledDelay()));
 
         scheduler.performTicks(20L * 6);
 
@@ -2571,7 +2571,7 @@ public class FlightManagerTest {
         verify(player).setFlying(false);
         verify(player).setFallDistance(0);
         verify(bossBarManager).removeBossBar(player);
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabled()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabled()));
     }
 
     /**
@@ -2602,7 +2602,7 @@ public class FlightManagerTest {
         verify(player).setFlying(false);
         verify(player).setFallDistance(0);
         verify(bossBarManager).removeBossBar(player);
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabled()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabled()));
     }
 
     /**
@@ -2633,7 +2633,7 @@ public class FlightManagerTest {
         verify(player).setFlying(false);
         verify(player).setFallDistance(0);
         verify(bossBarManager).removeBossBar(player);
-        verify(player, never()).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabled()));
+        verify(player, never()).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabled()));
     }
 
     /**
@@ -2661,7 +2661,7 @@ public class FlightManagerTest {
         verify(player).setFlying(false);
         verify(player).setFallDistance(0);
         verify(bossBarManager).removeBossBar(player);
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabled()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabled()));
     }
 
     /**
@@ -2683,7 +2683,7 @@ public class FlightManagerTest {
         Player player = mock(Player.class);
 
         assertFalse(flightManager.isWorldAllowed(null, player, true));
-        verify(player).sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
+        verify(player).sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
     }
 
     /**

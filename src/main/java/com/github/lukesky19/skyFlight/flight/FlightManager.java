@@ -29,7 +29,7 @@ import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.integration.HookManager;
 import com.github.lukesky19.skyFlight.integration.hooks.BentoBoxHook;
 import com.github.lukesky19.skyFlight.integration.hooks.WorldGuardHook;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -109,7 +109,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoPermission()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoPermission()));
             }
 
             return false;
@@ -245,7 +245,7 @@ public class FlightManager {
 
         // Send a success message
         if(message) {
-            player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+            player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         }
 
         // Show the boss bar
@@ -268,10 +268,10 @@ public class FlightManager {
         // Check if the player has player data
         @Nullable PlayerData playerData = playerDataManager.getPlayerData(player.getUniqueId());
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("Unable to enable flight for player " + player.getName() + " due to invalid player data."));
+            logger.warn(AdventureUtility.deserialize("Unable to enable flight for player " + player.getName() + " due to invalid player data."));
 
             if(message) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPlayerData()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPlayerData()));
             }
 
             return false;
@@ -287,7 +287,7 @@ public class FlightManager {
 
         // Send a success message
         if(message) {
-            player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightEnabled()));
+            player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightEnabled()));
         }
 
         // Store that the player is using timed flight in their player data
@@ -314,7 +314,7 @@ public class FlightManager {
         CompletableFuture<Boolean> resultFuture = new CompletableFuture<>();
 
         // Send a warning that flight will be disabled
-        player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabledDelay()));
+        player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabledDelay()));
 
         skyFlight.getServer().getScheduler().runTaskLater(skyFlight, () -> {
             if(!player.isOnline() || !player.isConnected()) {
@@ -323,7 +323,7 @@ public class FlightManager {
             }
 
             if(canFly(player, false)) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNotDisabled()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNotDisabled()));
 
                 resultFuture.complete(false);
                 return;
@@ -363,7 +363,7 @@ public class FlightManager {
         if(message) {
             Locale locale = localeManager.getConfiguration();
 
-            player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightDisabled()));
+            player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightDisabled()));
         }
 
         return true;
@@ -381,7 +381,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPluginSettings()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPluginSettings()));
             }
 
             return false;
@@ -401,7 +401,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoPermission()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoPermission()));
             }
 
             return false;
@@ -421,7 +421,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoPermission()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoPermission()));
             }
 
             return false;
@@ -451,7 +451,7 @@ public class FlightManager {
 
         if(settings == null) {
             if(message) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
             }
 
             return false;
@@ -459,7 +459,7 @@ public class FlightManager {
 
         if(settings.disabledWorlds().contains(player.getWorld().getName())) {
             if(message) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldNotAllowed()));
             }
 
             return false;
@@ -483,7 +483,7 @@ public class FlightManager {
 
         if(island == null) {
             if(message) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
             }
 
             return false;
@@ -491,7 +491,7 @@ public class FlightManager {
 
         if(bentoBoxHook.isOutsideIsland(player, island)) {
             if(message) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightOutsideIslandNotAllowed()));
             }
 
             return false;
@@ -499,7 +499,7 @@ public class FlightManager {
 
         if(bentoBoxHook.isFlightDisallowed(player, island)) {
             if(message) {
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightIslandNotAllowed()));
             }
 
             return false;
@@ -522,7 +522,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightWorldGuardNotAllowed()));
             }
 
             return false;
@@ -543,7 +543,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.invalidPlayerData()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.invalidPlayerData()));
             }
 
             return false;
@@ -564,7 +564,7 @@ public class FlightManager {
             if(message) {
                 Locale locale = localeManager.getConfiguration();
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightNoFlightTime()));
+                player.sendMessage(AdventureUtility.deserialize(locale.prefix() + locale.flightNoFlightTime()));
             }
 
             return false;

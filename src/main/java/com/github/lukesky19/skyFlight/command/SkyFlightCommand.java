@@ -24,8 +24,8 @@ import com.github.lukesky19.skyFlight.locale.LocaleManager;
 import com.github.lukesky19.skyFlight.flight.FlightManager;
 import com.github.lukesky19.skyFlight.player.PlayerDataManager;
 import com.github.lukesky19.skyFlight.settings.SettingsManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
-import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
+import com.github.lukesky19.skylib.paper.api.plugin.SkyPlugin;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -120,7 +120,7 @@ public class SkyFlightCommand {
                     Locale locale = localeManager.getConfiguration();
                     CommandSender sender = ctx.getSource().getSender();
                     if(!(sender instanceof Player player)) {
-                        sender.sendMessage(AdventureUtil.deserialize(locale.commandPlayerOnly()));
+                        sender.sendMessage(AdventureUtility.deserialize(locale.commandPlayerOnly()));
                         return 0;
                     }
 

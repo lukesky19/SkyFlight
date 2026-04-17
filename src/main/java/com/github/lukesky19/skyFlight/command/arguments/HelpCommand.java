@@ -19,7 +19,7 @@ package com.github.lukesky19.skyFlight.command.arguments;
 
 import com.github.lukesky19.skyFlight.locale.Locale;
 import com.github.lukesky19.skyFlight.locale.LocaleManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -52,7 +52,7 @@ public class HelpCommand {
                     CommandSender sender = ctx.getSource().getSender();
 
                     for(String msg : locale.help()) {
-                        sender.sendMessage(AdventureUtil.deserialize(msg));
+                        sender.sendMessage(AdventureUtility.deserialize(msg));
                     }
 
                     return 1;

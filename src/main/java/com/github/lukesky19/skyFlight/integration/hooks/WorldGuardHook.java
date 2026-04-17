@@ -17,9 +17,9 @@
 */
 package com.github.lukesky19.skyFlight.integration.hooks;
 
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
-import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
-import com.github.lukesky19.skylib.api.integration.Hook;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
+import com.github.lukesky19.skylib.common.api.integration.Hook;
+import com.github.lukesky19.skylib.paper.api.plugin.SkyPlugin;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.LocalPlayer;
@@ -107,17 +107,17 @@ public class WorldGuardHook implements Hook {
             if(existing instanceof StateFlag existingFlag) {
                 flightFlag = existingFlag;
             } else {
-                logger.warn(AdventureUtil.deserialize("SkyFlight WorldGuard Flight Flag overwritten by another plugin! Please report the incompatible plugin."));
+                logger.warn(AdventureUtility.plain("SkyFlight WorldGuard Flight Flag overwritten by another plugin! Please report the incompatible plugin."));
             }
         } catch (IllegalStateException illegalStateException) {
-            logger.warn(AdventureUtil.deserialize("WorldGuard flags cannot be registered after the server has been started. Please restart your server."));
-            logger.warn(AdventureUtil.deserialize("Attempting to get an existing flag that was registered (if any)."));
+            logger.warn(AdventureUtility.plain("WorldGuard flags cannot be registered after the server has been started. Please restart your server."));
+            logger.warn(AdventureUtility.plain("Attempting to get an existing flag that was registered (if any)."));
 
             Flag<?> existing = registry.get("skyflight");
             if(existing instanceof StateFlag existingFlag) {
                 flightFlag = existingFlag;
             } else {
-                logger.warn(AdventureUtil.deserialize("No existing SkyFlight Flight Flag found. Most likely you loaded the plugin outside of a fresh server (re)start."));
+                logger.warn(AdventureUtility.plain("No existing SkyFlight Flight Flag found. Most likely you loaded the plugin outside of a fresh server (re)start."));
             }
         }
     }

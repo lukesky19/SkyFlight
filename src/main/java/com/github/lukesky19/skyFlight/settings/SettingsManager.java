@@ -17,8 +17,8 @@
 */
 package com.github.lukesky19.skyFlight.settings;
 
-import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
-import com.github.lukesky19.skylib.api.common.abstracts.config.SimpleConfigManager;
+import com.github.lukesky19.skylib.common.api.configuration.abstracts.SimpleConfigManager;
+import com.github.lukesky19.skylib.paper.api.plugin.SkyPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +34,7 @@ public class SettingsManager extends SimpleConfigManager<Settings> {
      * @param plugin A {@link SkyPlugin}.
      */
     public SettingsManager(@NotNull SkyPlugin plugin) {
-        super(plugin, Path.of(plugin.getDataFolder() + File.separator + "settings.yml"), Settings.class);
+        super(plugin, Path.of(plugin.getDirectoryFile() + File.separator + "settings.yml"), Settings.class);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SettingsManager extends SimpleConfigManager<Settings> {
     }
 
     @Override
-    public void saveBundledConfig() {
+    public void saveDefaultConfiguration() {
         plugin.saveResource("settings.yml", false);
     }
 }

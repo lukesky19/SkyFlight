@@ -19,8 +19,9 @@ package com.github.lukesky19.skyFlight.command.arguments;
 
 import com.github.lukesky19.skyFlight.locale.Locale;
 import com.github.lukesky19.skyFlight.locale.LocaleManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
-import com.github.lukesky19.skylib.api.common.abstracts.SkyPlugin;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
+import com.github.lukesky19.skylib.paper.api.adventure.PaperAdventureUtility;
+import com.github.lukesky19.skylib.paper.api.plugin.SkyPlugin;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -60,9 +61,9 @@ public class ReloadCommand {
                     Locale locale = localeManager.getConfiguration();
 
                     if(ctx.getSource().getSender() instanceof Player player) {
-                        player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.reload()));
+                        player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.reload()));
                     } else {
-                        logger.info(AdventureUtil.deserialize(locale.reload()));
+                        logger.info(AdventureUtility.deserialize(locale.reload()));
                     }
 
                     return 1;

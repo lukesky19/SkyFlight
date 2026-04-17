@@ -19,8 +19,9 @@ package com.github.lukesky19.skyFlight.database.table;
 
 import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.database.queue.QueueManager;
-import com.github.lukesky19.skylib.api.database.parameter.Parameter;
-import com.github.lukesky19.skylib.api.database.parameter.impl.*;
+import com.github.lukesky19.skylib.common.api.database.parameter.Parameter;
+import com.github.lukesky19.skylib.common.api.database.parameter.impl.LongParameter;
+import com.github.lukesky19.skylib.common.api.database.parameter.impl.UUIDParameter;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
@@ -60,7 +61,7 @@ public class PlayerDataTable {
         String indexCreationSql = "CREATE INDEX IF NOT EXISTS idx_skyflight_player_data_player_ids ON " + tableName + "(player_id);";
 
         return queueManager.queueBulkWriteTransaction(List.of(tableCreationSql, indexCreationSql))
-                .thenCompose(v1 -> versionsTable.updateVersion(tableName, 1));
+                .thenCompose(_ -> versionsTable.updateVersion(tableName, 1));
     }
 
     /**

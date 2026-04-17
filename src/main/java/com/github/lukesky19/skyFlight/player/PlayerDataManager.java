@@ -19,7 +19,7 @@ package com.github.lukesky19.skyFlight.player;
 
 import com.github.lukesky19.skyFlight.database.DatabaseManager;
 import com.github.lukesky19.skyFlight.database.table.PlayerDataTable;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,9 +88,9 @@ public class PlayerDataManager {
                     // Store the player data
                     playerDataMap.put(uuid, updatedPlayerData);
                 })
-                .exceptionally(ex -> {
+                .exceptionally(_ -> {
                     // Log an error if an exception occurred during loading.
-                    logger.error(AdventureUtil.deserialize("Failed to load player data from the database."));
+                    logger.error(AdventureUtility.plain("Failed to load player data from the database."));
                     return null;
                 });
     }
@@ -102,15 +102,15 @@ public class PlayerDataManager {
     public void unloadPlayerData(@NotNull UUID uuid) {
         @Nullable PlayerData playerData = getPlayerData(uuid);
         if(playerData == null) {
-            logger.warn(AdventureUtil.deserialize("No player data to save and unload."));
+            logger.warn(AdventureUtility.plain("No player data to save and unload."));
             return;
         }
 
         databaseManager.getPlayerDataTable().savePlayerData(uuid, playerData)
-                .thenAccept(v -> playerDataMap.remove(uuid))
-                .exceptionally(ex -> {
+                .thenAccept(_ -> playerDataMap.remove(uuid))
+                .exceptionally(_ -> {
                     playerDataMap.remove(uuid);
-                    logger.error(AdventureUtil.deserialize("Failed to save player data to the database."));
+                    logger.error(AdventureUtility.plain("Failed to save player data to the database."));
                     return null;
                 });
     }

@@ -24,7 +24,7 @@ import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.player.PlayerDataManager;
 import com.github.lukesky19.skyFlight.settings.Settings;
 import com.github.lukesky19.skyFlight.settings.SettingsManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.common.api.adventure.AdventureUtility;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
@@ -297,7 +297,7 @@ public class BossBarManagerTest {
             assertNotNull(settings.timedBossBar().bossBarText());
 
             BossBar.bossBar(
-                    AdventureUtil.deserialize(settings.timedBossBar().bossBarText(),
+                    AdventureUtility.deserialize(settings.timedBossBar().bossBarText(),
                             List.of(Placeholder.parsed("time", localeManager.formatFlightTime(
                                     locale.timeFormat(), playerData.getFlightTime())))),
                     1,
@@ -435,7 +435,7 @@ public class BossBarManagerTest {
         bossBarMockedStatic.when(() -> {
             assertNotNull(settings.infiniteBossBar().bossBarText());
             BossBar.bossBar(
-                    AdventureUtil.deserialize(settings.infiniteBossBar().bossBarText()),
+                    AdventureUtility.deserialize(settings.infiniteBossBar().bossBarText()),
                     1,
                     BossBar.Color.BLUE,
                     BossBar.Overlay.PROGRESS);

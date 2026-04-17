@@ -23,7 +23,7 @@ import com.github.lukesky19.skyFlight.locale.LocaleManager;
 import com.github.lukesky19.skyFlight.player.PlayerData;
 import com.github.lukesky19.skyFlight.flight.FlightManager;
 import com.github.lukesky19.skyFlight.time.TimeManager;
-import com.github.lukesky19.skylib.api.adventure.AdventureUtil;
+import com.github.lukesky19.skylib.paper.api.adventure.PaperAdventureUtility;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -84,45 +84,45 @@ public class FlightTimeTask extends BukkitRunnable {
             } else if(flightTime == 31) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "30"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "30"))));
             } else if(flightTime == 16) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "15"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "15"))));
             } else if(flightTime == 11) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "10"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "10"))));
             } else if(flightTime == 6) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "5"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "5"))));
             } else if(flightTime == 5) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "4"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "4"))));
             } else if(flightTime == 4) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "3"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "3"))));
             } else if(flightTime == 3) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "2"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "2"))));
             } else if(flightTime == 2) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("seconds", "1"))));
+                player.sendMessage(PaperAdventureUtility.deserialize(player, locale.prefix() + locale.flightTimeWarning(), List.of(Placeholder.parsed("time", "1"))));
             } else if(flightTime == 1) {
                 timeManager.removeFlightTime(player, 1);
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightTimeExhausted()));
+                player.sendMessage(PaperAdventureUtility.deserialize(locale.prefix() + locale.flightTimeExhausted()));
 
                 flightManager.disableFlight(player, false);
             } else {
                 timeManager.setFlightTime(player, 0);
 
-                player.sendMessage(AdventureUtil.deserialize(locale.prefix() + locale.flightTimeExhausted()));
+                player.sendMessage(PaperAdventureUtility.deserialize(locale.prefix() + locale.flightTimeExhausted()));
 
                 flightManager.disableFlight(player, false);
             }

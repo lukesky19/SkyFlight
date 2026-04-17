@@ -17,6 +17,7 @@
 */
 package com.github.lukesky19.skyFlight.common;
 
+import com.google.gson.JsonParser;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -34,6 +35,9 @@ public class MockBukkitExtension implements BeforeAllCallback, AfterAllCallback 
 
     @Override
     public void beforeAll(ExtensionContext context) {
+        System.out.println(com.google.gson.JsonParser.class.getProtectionDomain().getCodeSource());
+        System.out.println(com.google.gson.Gson.class.getProtectionDomain().getCodeSource());
+
         // Setup mocked server
         if(testClassCounter.get() == 0) {
             server = MockBukkit.mock();

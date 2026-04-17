@@ -21,7 +21,7 @@ import com.github.lukesky19.skyFlight.database.connection.ConnectionManager;
 import com.github.lukesky19.skyFlight.database.queue.QueueManager;
 import com.github.lukesky19.skyFlight.database.table.PlayerDataTable;
 import com.github.lukesky19.skyFlight.database.table.VersionsTable;
-import com.github.lukesky19.skylib.api.database.AbstractDatabaseManager;
+import com.github.lukesky19.skylib.common.api.database.AbstractDatabaseManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
