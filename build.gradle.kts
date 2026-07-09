@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.lukesky19"
-version = "0.3.0.0"
+version = "0.3.1.0"
 
 repositories {
     mavenLocal()
@@ -16,20 +16,23 @@ repositories {
     maven("https://maven.enginehub.org/repo/")
     mavenCentral()
 }
+
+configurations {
+    testImplementation {
+        extendsFrom(configurations.compileOnly.get())
+    }
+}
+
 dependencies {
     // Paper
     compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
-    testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
 
     // SkyLib
-    compileOnly("com.github.lukesky19:SkyLib:2.0.0.0")
-    testImplementation("com.github.lukesky19:SkyLib:2.0.0.0")
+    compileOnly("com.github.lukesky19:SkyLib:2.0.2.0")
 
     // Integration
     compileOnly("world.bentobox:bentobox:2.7.0-SNAPSHOT")
-    testImplementation("world.bentobox:bentobox:2.7.0-SNAPSHOT")
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.16")
-    testImplementation("com.sk89q.worldguard:worldguard-bukkit:7.0.16")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.17-SNAPSHOT")
 
     // Test Dependencies
     testImplementation("org.xerial:sqlite-jdbc:3.51.1.0")
@@ -37,7 +40,7 @@ dependencies {
     testImplementation("org.junit.platform:junit-platform-launcher:1.10.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.14.1")
     testImplementation("org.mockito:mockito-junit-jupiter:5.21.0")
-    testImplementation("org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.108.0")
+    testImplementation("org.mockbukkit.mockbukkit:mockbukkit-v26.1.2:4.113.1")
 }
 
 java {
